@@ -1,0 +1,30 @@
+[package]
+name = "vhost-user-rpmb"
+version = "0.1.0"
+authors = ["Manos Pitsidianakis <manos.pitsidianakis@linaro.org>"]
+description = "A virtio-rpmb device using the vhost-user protocol."
+repository = "https://github.com/rust-vmm/vhost-device"
+readme = "README.md"
+categories = ["virtualization"]
+license = "Apache-2.0 OR BSD-3-Clause"
+edition = "2021"
+
+[dependencies]
+clap = { version = "4.4", features = ["derive"] }
+data-encoding = "2.4.0"
+env_logger = "0.10"
+hmac = "0.12"
+log = "0.4"
+sha2 = "0.10"
+thiserror = "1.0"
+vhost = { version = "0.9", features = ["vhost-user-backend"] }
+vhost-user-backend = "0.11"
+virtio-bindings = "0.2.1"
+virtio-queue = "0.10"
+vm-memory = "0.13.1"
+vmm-sys-util = "0.11"
+
+[dev-dependencies]
+tempfile = { version = "3.8" }
+virtio-queue = { version = "0.10", features = ["test-utils"] }
+vm-memory = { version = "0.13.1", features = ["backend-mmap", "backend-atomic"] }

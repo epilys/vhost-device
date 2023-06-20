@@ -1,6 +1,7 @@
 [workspace]
 resolver = "2"
 members = [
+  "vhost-device-rpmb",
   "vhost-device-sound",
   "vhost-device-video",
 ]

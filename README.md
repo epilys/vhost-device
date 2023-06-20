@@ -41,6 +41,7 @@ Here is the list of device backends in **staging**:
 
 - [Sound](https://github.com/rust-vmm/vhost-device/blob/main/staging/vhost-device-sound/README.md)
 - [Video](https://github.com/rust-vmm/vhost-device/blob/main/staging/vhost-device-video/README.md)
+- [RPMB](https://github.com/rust-vmm/vhost-device/blob/main/staging/vhost-device-rpmb/README.md)
 
 <!--
 Template:
