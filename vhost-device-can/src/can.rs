@@ -10,7 +10,7 @@ use std::{
     thread::{spawn, JoinHandle},
 };
 
-use log::{error, info, trace, warn};
+use log::{info, trace, warn};
 use thiserror::Error as ThisError;
 use vmm_sys_util::eventfd::{EventFd, EFD_NONBLOCK};
 extern crate queues;
