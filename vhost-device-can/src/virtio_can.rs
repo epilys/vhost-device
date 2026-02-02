@@ -122,6 +122,34 @@ pub struct VirtioCanHeader {
 // reading its content from byte array.
 unsafe impl ByteValued for VirtioCanHeader {}
 
+impl<'a> From<&'a VirtioCanFrame> for (VirtioCanHeader, &'a [u8]) {
+    fn from(frame: &'a VirtioCanFrame) -> Self {
+        let VirtioCanFrame {
+            msg_type,
+            length,
+            reserved,
+            flags,
+            can_id,
+            sdu,
+        } = frame;
+
+        let data = {
+            let length: u16 = (*length).into();
+            &sdu[..usize::from(length)]
+        };
+        (
+            VirtioCanHeader {
+                msg_type: *msg_type,
+                length: *length,
+                reserved: *reserved,
+                flags: *flags,
+                can_id: *can_id,
+            },
+            data,
+        )
+    }
+}
+
 #[derive(Copy, Clone, Default)]
 #[repr(C)]
 pub struct VirtioCanCtrlRequest {

@@ -7,7 +7,7 @@
 
 use std::{
     convert,
-    io::{self, Result as IoResult},
+    io::{self, Result as IoResult, Write},
     os::fd::AsRawFd,
     slice::from_raw_parts,
     sync::{Arc, RwLock},
@@ -517,8 +517,15 @@ impl VhostUserCanBackend {
                 }
             };
 
+            // sdu data is of variable length, controlled by can_rx.length field, so write it
+            // separately.
+            let (hdr, data) = (&can_rx).into();
+
             writer
-                .write_obj(can_rx)
+                .write_obj(hdr)
+                .map_err(|_| Error::DescriptorWriteFailed)?;
+            writer
+                .write_all(data)
                 .map_err(|_| Error::DescriptorWriteFailed)?;
 
             if vring
